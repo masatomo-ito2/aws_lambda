@@ -6,7 +6,7 @@ exports.handler = function (event, context, callback) {
     headers: {
       'Content-Type': 'text/html; charset=utf-8',
     },
-    body: '<p>ようこそTerraformの世界へ！Snapshot 2020/9/2</p>',
+    body: '<p>ようこそTerraformの世界へ！test</p>',
   }
   callback(null, response)
 }
