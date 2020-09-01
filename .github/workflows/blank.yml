@@ -24,7 +24,7 @@ jobs:
       
       # Runs a single command using the runners shell
       - name: Package code
-        run: zip $GITHUB_SHA.zip main.js
+        run: zip ${GITHUB_SHA}.zip main.js
 
       # Runs a set of commands using the runners shell
       #- name: Run a multi-line script
@@ -39,8 +39,8 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: 'ap-northeast-1' 
-          SOURCE: './$GITHUB_SHA.zip' 
-          DEST: 's3://hashicorp-japan/masa/terraform_serverless/$GITHUB_SHA.zip'
+          SOURCE: './${GITHUB_SHA}.zip' 
+          DEST: 's3://hashicorp-japan/masa/terraform_serverless/${GITHUB_SHA}.zip'
 
   
     
