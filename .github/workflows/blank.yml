@@ -42,5 +42,7 @@ jobs:
           SOURCE: './${GITHUB_SHA}.zip' 
           DEST: 's3://hashicorp-japan/masa/terraform_serverless/${GITHUB_SHA}.zip'
 
-  
+    # Trigger Terraform run
+      - name: Run trigger terraform cloud
+        run: ./script/deploy_tfc.sh
     
