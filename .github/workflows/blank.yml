@@ -16,9 +16,7 @@ jobs:
   deploy:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    env:
-      ARTIFACT: $GITHUB_SHA.zip
-
+    
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -27,7 +25,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Package code
-        run: zip $ARTIFACT main.js
+        run: zip $GITHUB_SHA.zip main.js
 
       # Runs a set of commands using the runners shell
       #- name: Run a multi-line script
@@ -43,7 +41,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: 'ap-northeast-1' 
           SOURCE: './$ARTIFACT' 
-          DEST: 's3://hashicorp-japan/masa/terraform_serverless/$ARTIFACT'
+          DEST: 's3://hashicorp-japan/masa/terraform_serverless/$GITHUB_SHA.zip'
 
   
     
