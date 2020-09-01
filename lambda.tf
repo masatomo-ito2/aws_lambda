@@ -20,7 +20,7 @@ resource "aws_lambda_function" "example" {
   # The bucket name as created earlier with "aws s3api create-bucket"
   s3_bucket = "hashicorp-japan"
   # s3_key    = "masa/terraform_serverless/example.zip"
-  s3_key = var.artifact
+  s3_key = "masa/terraform_serverless/${var.artifact}"
 
   # "main" is the filename within the zip file (main.js) and "handler"
   # is the name of the property under which the handler function was
