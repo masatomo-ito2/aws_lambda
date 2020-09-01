@@ -39,7 +39,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: 'ap-northeast-1' 
-          SOURCE: './$ARTIFACT' 
+          SOURCE: './$GITHUB_SHA.zip' 
           DEST: 's3://hashicorp-japan/masa/terraform_serverless/$GITHUB_SHA.zip'
 
   
