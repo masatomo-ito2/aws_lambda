@@ -45,4 +45,6 @@ jobs:
     # Trigger Terraform run
       - name: Run trigger terraform cloud
         run: ./script/deploy_tfc.sh
+        env:
+          TFC_TOKEN: ${{ secrets.TFC_TOKEN }}
     
