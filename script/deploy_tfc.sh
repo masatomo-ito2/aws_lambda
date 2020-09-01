@@ -22,7 +22,7 @@ cat <<EOF> vars.json
 EOF
 
 curl \
-  --header "Authorization: Bearer $TOKEN" \
+  --header "Authorization: Bearer $TFC_TOKEN" \
   --header "Content-Type: application/vnd.api+json" \
   --request PATCH \
   --data @vars.json \
@@ -39,7 +39,7 @@ tar cvfz ${UPLOAD_FILE_NAME} lambda.tf
 echo '{"data":{"type":"configuration-versions"}}' > ./create_config_version.json
 
 UPLOAD_URL=($(curl \
-  --header "Authorization: Bearer $TOKEN" \
+  --header "Authorization: Bearer $TFC_TOKEN" \
   --header "Content-Type: application/vnd.api+json" \
   --request POST \
   --data @create_config_version.json \
