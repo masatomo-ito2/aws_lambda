@@ -2,6 +2,7 @@
 
 # このIDをTFC上のWorkspaceのものに書き換えてください
 WORKSPACE_ID=ws-xxxxxxxxxxxxxxxx 
+VARIABLE_ID=var-xxxxxxxxxxxxxxxx
 
 # Deployするパッケージを変数で定義します。
 # 変数のIDはTFC上で定義するVariableのIDに書き換えてください。
@@ -9,7 +10,7 @@ WORKSPACE_ID=ws-xxxxxxxxxxxxxxxx
 cat <<EOF> vars.json
 {
   "data": {
-    "id":"var-xxxxxxxxxxxxxxxx", 
+    "id":"${VARIABLE_ID}", 
     "attributes": {
       "key":"artifact",
       "value":"${GITHUB_SHA}.zip",
