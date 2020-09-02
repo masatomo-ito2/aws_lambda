@@ -19,7 +19,6 @@ resource "aws_lambda_function" "example" {
 
   # The bucket name as created earlier with "aws s3api create-bucket"
   s3_bucket = "hashicorp-japan"
-  # s3_key    = "masa/terraform_serverless/example.zip"
   s3_key = "masa/terraform_serverless/${var.artifact}"
 
   # "main" is the filename within the zip file (main.js) and "handler"
@@ -120,7 +119,7 @@ resource "aws_api_gateway_deployment" "example" {
   ]
 
   rest_api_id = aws_api_gateway_rest_api.example.id
-  stage_name  = "test"
+  stage_name  = "snapshot"
 }
 
 # Output
