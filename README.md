@@ -2,16 +2,20 @@
 
 TerraformでLambdaをデプロイするデモです。
 
-*lambda.tf*
+**lambda.tf**
+
 ProvisioningをするTerraformのコード
 
-*main.js*
+**main.js**
+
 デプロイするファンクションのコード（Node.js）
 
-*script/deploy_tfc.sh*
+**script/deploy_tfc.sh**
+
 GitHub actionsから呼ばれるスクリプト。TFC上のVariableをアップデートし、lambda.tfを流し込んでRunをトリガーします。
 
-*.github/workflows/blank.yml*
+**.github/workflows/blank.yml**
+
 GitHub actions(CI/CD)の設定ファイルです。この中のステップで、コードのパッケージングとデプロイ、そして上記のdeploy_tfc.shを実行します。
 
 ## TFCのWorkspace設定
