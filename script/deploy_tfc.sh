@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# $B$3$N(BID$B$r(BTFC$B>e$N(BWorkspace$B$N$b$N$K=q$-49$($F$/$@$5$$(B
+# このIDをTFC上のWorkspaceのものに書き換えてください
 WORKSPACE_ID=ws-xxxxxxxxxxxxxxxx 
 
-# Deploy$B$9$k%Q%C%1!<%8$rJQ?t$GDj5A$7$^$9!#(B
-# $BJQ?t$N(BID$B$O(BTFC$B>e$GDj5A$9$k(BVariable$B$N(BID$B$K=q$-49$($F$/$@$5$$!#(B
+# Deployするパッケージを変数で定義します。
+# 変数のIDはTFC上で定義するVariableのIDに書き換えてください。
 
 cat <<EOF> vars.json
 {
@@ -30,14 +30,14 @@ curl \
   --data @vars.json \
   https://app.terraform.io/api/v2/vars/var-MVaQ54KcxjEU1p9u
 
-# Terraform code$B$r%m!<%I$7$^$9!#(B
+# Terraform codeをロードします。
 UPLOAD_FILE_NAME="./content_$(date +'%Y%m%d%H%M%S').zip"
 
 echo ${UPLOAD_FILE_NAME}
 
 tar cvfz ${UPLOAD_FILE_NAME} lambda.tf
 
-# Terraform code$B$r%"%C%W%m!<%I$9$k(BURL$B$r<hF@$7$^$9!#(B
+# Terraform codeをアップロードするURLを取得します。
 echo '{"data":{"type":"configuration-versions"}}' > ./create_config_version.json
 
 UPLOAD_URL=($(curl \
@@ -50,14 +50,14 @@ UPLOAD_URL=($(curl \
 
 echo  ${UPLOAD_URL}
 
-# Terraform code$B$r%"%C%W%m!<%I$7$F(BRun$B$N%H%j%,$r$+$1$^$9!#(B
+# Terraform codeをアップロードしてRunのトリガをかけます。
 curl \
   --header "Content-Type: application/octet-stream" \
   --request PUT \
   --data-binary @"$UPLOAD_FILE_NAME" \
   $UPLOAD_URL
 
-# $B%/%j!<%s%"%C%W(B
+# クリーンアップ
 rm ${UPLOAD_FILE_NAME}
 rm ./vars.json
 rm ./create_config_version.json
