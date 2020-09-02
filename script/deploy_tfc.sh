@@ -1,13 +1,15 @@
 #!/bin/bash
 
-WORKSPACE_ID=ws-8LUWN83Xnq8atExm # aws_lambda
+# このIDをTFC上のWorkspaceのものに書き換えてください
+WORKSPACE_ID=ws-xxxxxxxxxxxxxxxx 
 
-# update artifact's name
+# Deployするパッケージを変数で定義します。
+# 変数のIDはTFC上で定義するVariableのIDに書き換えてください。
 
 cat <<EOF> vars.json
 {
   "data": {
-    "id":"var-MVaQ54KcxjEU1p9u",
+    "id":"var-xxxxxxxxxxxxxxxx", 
     "attributes": {
       "key":"artifact",
       "value":"${GITHUB_SHA}.zip",
@@ -28,14 +30,14 @@ curl \
   --data @vars.json \
   https://app.terraform.io/api/v2/vars/var-MVaQ54KcxjEU1p9u
 
-# Terraform code
+# Terraform codeをロードします。
 UPLOAD_FILE_NAME="./content_$(date +'%Y%m%d%H%M%S').zip"
 
 echo ${UPLOAD_FILE_NAME}
 
 tar cvfz ${UPLOAD_FILE_NAME} lambda.tf
 
-# Create config-version
+# Terraform codeをアップロードするURLを取得します。
 echo '{"data":{"type":"configuration-versions"}}' > ./create_config_version.json
 
 UPLOAD_URL=($(curl \
@@ -48,13 +50,14 @@ UPLOAD_URL=($(curl \
 
 echo  ${UPLOAD_URL}
 
-# Upload terraform conig to TFC
+# Terraform codeをアップロードしてRunのトリガをかけます。
 curl \
   --header "Content-Type: application/octet-stream" \
   --request PUT \
   --data-binary @"$UPLOAD_FILE_NAME" \
   $UPLOAD_URL
 
+# クリーンアップ
 rm ${UPLOAD_FILE_NAME}
 rm ./vars.json
 rm ./create_config_version.json
